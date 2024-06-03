@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Custom Software Development",
+        "description": "Delivering tailored software solutions that perfectly align with your business needs. Our expert team specializes in designing, developing, and deploying robust, scalable, and secure applications that drive efficiency and innovation.",
+        "image": "https://i.ibb.co/HPkB4jz/Developer-activity-amico.png"
+    },
+    {
+        "title": "Web Development",
+        "description": "Building responsive and user-friendly websites that provide a seamless experience across all devices. Our expertise includes front-end, back-end, and full-stack development.",
+        "image": "https://i.ibb.co/BjsPPHV/Programming-amico.png"
+    },
+    {
+        "title": "Mobile App Development",
+        "description": "Creating high-performance mobile applications for both iOS and Android platforms. We deliver intuitive and engaging apps that drive user engagement and satisfaction.",
+        "image": "https://i.ibb.co/zhf34v8/Mobile-development-bro.png"
+    }
+]
