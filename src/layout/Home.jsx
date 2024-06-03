@@ -2,6 +2,9 @@ import { Helmet } from "react-helmet";
 import Banner from "../components/Banner/Banner";
 import OurServices from "../components/OurServices/OurServices";
 import Testimonial from "../components/Testimonial";
+import Newsletter from "../components/Newsletter/Newsletter";
+import Footer from "../components/Footer/Footer";
+import FAQs from "../components/FAQs/FAQs";
 
 const Home = () => {
     return (
@@ -12,6 +15,9 @@ const Home = () => {
             <Banner />
             <OurServices/>
             <Testimonial/>
+            <FAQs/>
+            <Newsletter/>
+            <Footer/>
         </div>
     );
 };

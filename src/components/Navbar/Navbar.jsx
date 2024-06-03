@@ -1,15 +1,32 @@
 import { NavLink } from "react-router-dom";
 import "./Navbar.css"
 import PropTypes from 'prop-types'
+import { useEffect, useState } from "react";
 
 const Navbar = ({theme,setTheme}) => {
+    const [showNavbar , setShowNavbar]=useState(true)
+    const [lastScrollY, setLastScrollY]=useState(0)
+    useEffect(()=>{
+        const handleScroll = () =>{
+            if(window.scrollY > lastScrollY){
+                setShowNavbar(false)
+            }else{
+                setShowNavbar(true)
+            }
+            setLastScrollY(window.scrollY)
+        }
+        window.addEventListener('scroll',handleScroll)
+        return ()=>{
+            window.removeEventListener('scroll',handleScroll)
+        }
+    },[lastScrollY])
     const navLinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/dashboard">Dashboard</NavLink></li>
         <li><NavLink to="/contactUs">Contact Us</NavLink></li>
     </>
     return (
-        <div className="navbar  md:px-5 text-black dark:text-white">
+        <div className={`navbar  md:px-5  text-black dark:text-white fixed z-10 bg-white/5 bg-opacity-25 backdrop-blur-md transition-transform duration-300 ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
