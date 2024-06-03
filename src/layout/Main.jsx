@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import { useEffect, useState } from "react";
-import  { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 const Main = () => {
     const loadedTheme = localStorage.getItem("theme") === "true"
@@ -11,9 +11,11 @@ const Main = () => {
     }, [theme])
     return (
         <div className={`${theme ? "dark" : ""} text-[#151515] dark:text-white dark:bg-[#1d232a]`}>
-            <Navbar theme={theme} setTheme={setTheme} />
+            <div className="h-16">
+                <Navbar theme={theme} setTheme={setTheme} />
+            </div>
             <Outlet />
-            <Toaster/>
+            <Toaster />
         </div>
     );
 };

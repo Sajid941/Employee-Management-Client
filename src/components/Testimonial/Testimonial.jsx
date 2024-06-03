@@ -2,11 +2,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination,Autoplay } from 'swiper/modules';
-import SectionTitle from './SectionTitle/SectionTitle';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
+import SectionTitle from '../SectionTitle/SectionTitle';
 
 const Testimonial = () => {
     const { data: reviews = [] } = useQuery({
