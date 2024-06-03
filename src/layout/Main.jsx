@@ -5,14 +5,13 @@ import { useEffect, useState } from "react";
 const Main = () => {
     const loadedTheme = localStorage.getItem("theme") === "true"
     const [theme, setTheme] = useState(loadedTheme)
-    useEffect(()=>{
-        localStorage.setItem('theme',theme)
-    },[theme])
-    console.log(theme);
+    useEffect(() => {
+        localStorage.setItem('theme', theme)
+    }, [theme])
     return (
-        <div className={`${theme? "dark" : ""} text-[#151515] dark:text-white dark:bg-[#1d232a]`}>
+        <div className={`${theme ? "dark" : ""} text-[#151515] dark:text-white dark:bg-[#1d232a]`}>
             <Navbar theme={theme} setTheme={setTheme} />
-            <Outlet/>
+            <Outlet />
         </div>
     );
 };

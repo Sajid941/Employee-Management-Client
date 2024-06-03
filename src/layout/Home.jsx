@@ -1,8 +1,13 @@
+import { Helmet } from "react-helmet";
+import Banner from "../components/Banner/Banner";
 
 const Home = () => {
     return (
         <div>
-            <h2>This is Home</h2>
+            <Helmet>
+                <title> Home | LogiLink Labs </title>
+            </Helmet>
+            <Banner />
         </div>
     );
 };
