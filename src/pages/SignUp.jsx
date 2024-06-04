@@ -5,31 +5,52 @@ import toast from "react-hot-toast";
 import { Toaster } from 'react-hot-toast';
 import axios from "axios";
 import { updateProfile } from "firebase/auth";
+import useAxiosPublic from './../hooks/useAxiosPublic';
 
 const SignUp = () => {
     const { createUser } = useAuth()
     const [selectedAccount, setSelectedAccount] = useState('employee')
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors },reset } = useForm()
+    const axiosPublic = useAxiosPublic()
     const onSubmit = async (data) => {
         const imageFile = { image: data.photo[0] }
         const res = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_API_KEY}`, imageFile,
             {
+
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }
         )
-        console.log(res.data.data.display_url);
+        console.log(res.data.success);
+
+        const userInfo = {
+            name: data.name,
+            email: data.email,
+            photo: res.data.data.display_url,
+            designation: data.designation,
+            salary: data.salary,
+            bankAccount: data.bankAccount,
+            role:selectedAccount,
+        }
+
         createUser(data.email, data.password)
             .then(result => {
                 if (result.user) {
-                    if (res.data.data.display_url) {
+                    if (res.data.success) {
                         updateProfile(result.user, {
                             displayName: data.name,
                             photoURL: res.data.data.display_url
                         })
+
+                        //Send user data to database
+                        axiosPublic.post('/users', userInfo)
+                        .then(res => {
+                            console.log(res.data);
+                        })
                     }
                     toast.success('Sign Up successfully')
+                    reset()
                 }
             })
         console.log(data);
@@ -85,17 +106,6 @@ const SignUp = () => {
                                     <input {...register('email', { required: true })} type="email" placeholder="johnsnow@example.com" className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                                     {errors.email?.type === 'required' && <span className="text-red-600">This field is required</span>}
                                 </div>
-
-                                <div>
-                                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Bank Account</label>
-                                    <input {...register('bankAccount', { required: true })} type="number" minLength={8} placeholder="XXXX-XXXX-XXXX-XXXX" className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                                    {errors.bankAccount?.type === 'required' && <span className="text-red-600">This field is required</span>}
-                                </div>
-                                <div>
-                                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Salary</label>
-                                    <input {...register('salary', { required: true })} type="number" minLength={8} placeholder="10,0000" className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                                    {errors.salary?.type === 'required' && <span className="text-red-600">This field is required</span>}
-                                </div>
                                 <div>
                                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Designation</label>
                                     <select {...register('designation', { required: true })} defaultValue="default" name="" id="" className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40">
@@ -106,21 +116,19 @@ const SignUp = () => {
                                     {errors.designation?.type === 'required' && <span className="text-red-600">This field is required</span>}
                                 </div>
 
-
                                 <div>
-                                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
-                                    <input {...register('password', {
-                                        required: true,
-                                        // minLength: 6,
-                                        // pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).*$/
-                                    })}
-                                        type="password" placeholder="Enter your password"
-                                        className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                                    {errors.password?.type === 'required' && <span className="text-red-600">This field is required</span>}
-                                    {/* {errors.password?.type === 'minLength' && <span className="text-red-600">Password must be at least 6 characters long</span>}
-                                    {errors.password?.type === 'pattern' && <span className="text-red-600">Password must contain at least one capital letter and at least one special character.</span>} */}
+                                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Salary</label>
+                                    <input {...register('salary', { required: true })} type="number" minLength={8} placeholder="10,0000" className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                    {errors.salary?.type === 'required' && <span className="text-red-600">This field is required</span>}
                                 </div>
                                 <div>
+                                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Bank Account</label>
+                                    <input {...register('bankAccount', { required: true })} type="number" minLength={8} placeholder="XXXX-XXXX-XXXX-XXXX" className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                    {errors.bankAccount?.type === 'required' && <span className="text-red-600">This field is required</span>}
+                                </div>
+
+                                <div>
+                                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Photo</label>
                                     <label htmlFor="dropzone-file" className="flex items-center px-3 py-3 w-full mx-auto text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -132,10 +140,24 @@ const SignUp = () => {
                                     </label>
                                     {errors.photo?.type === 'required' && <span className="text-red-600">This field is required</span>}
                                 </div>
+
+                            </div>
+                            <div>
+                                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
+                                <input {...register('password', {
+                                    required: true,
+                                    // minLength: 6,
+                                    // pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).*$/
+                                })}
+                                    type="password" placeholder="Enter your password"
+                                    className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                {errors.password?.type === 'required' && <span className="text-red-600">This field is required</span>}
+                                {/* {errors.password?.type === 'minLength' && <span className="text-red-600">Password must be at least 6 characters long</span>}
+                                    {errors.password?.type === 'pattern' && <span className="text-red-600">Password must contain at least one capital letter and at least one special character.</span>} */}
                             </div>
 
                             <button
-                                className="flex items-center justify-between w-full mt-5 px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                className="flex items-center justify-between  mt-5 px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#202020] rounded-lg  focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                                 <span>Sign Up </span>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
