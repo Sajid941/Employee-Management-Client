@@ -6,11 +6,13 @@ import { Toaster } from 'react-hot-toast';
 import axios from "axios";
 import { updateProfile } from "firebase/auth";
 import useAxiosPublic from './../hooks/useAxiosPublic';
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+    const navigate = useNavigate()
     const { createUser } = useAuth()
     const [selectedAccount, setSelectedAccount] = useState('employee')
-    const { register, handleSubmit, formState: { errors },reset } = useForm()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const axiosPublic = useAxiosPublic()
     const onSubmit = async (data) => {
         const imageFile = { image: data.photo[0] }
@@ -31,7 +33,7 @@ const SignUp = () => {
             designation: data.designation,
             salary: data.salary,
             bankAccount: data.bankAccount,
-            role:selectedAccount,
+            role: selectedAccount,
         }
 
         createUser(data.email, data.password)
@@ -45,11 +47,12 @@ const SignUp = () => {
 
                         //Send user data to database
                         axiosPublic.post('/users', userInfo)
-                        .then(res => {
-                            console.log(res.data);
-                        })
+                            .then(res => {
+                                console.log(res.data);
+                            })
                     }
                     toast.success('Sign Up successfully')
+                    navigate('/')
                     reset()
                 }
             })
@@ -58,7 +61,7 @@ const SignUp = () => {
     return (
         <section className="bg-white dark:bg-gray-900">
             <div className="flex justify-center min-h-screen">
-                <div className="hidden bg-cover lg:block lg:w-2/5" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1494621930069-4fd4b2e24a11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80')" }}>
+                <div className="hidden bg-cover lg:block lg:w-2/5" style={{ backgroundImage: "url('https://i.ibb.co/zFjyL42/Mobile-login-bro.png')" }}>
                 </div>
 
                 <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
@@ -167,6 +170,11 @@ const SignUp = () => {
                                 </svg>
                             </button>
                         </form>
+                        <div className="flex items-center justify-center mt-4">
+                            <a className="text-xs text-gray-500  dark:text-gray-400 ">
+                                Already have account? <Link to="/signIn" className="text-blue-600 hover:underline">Sign In</Link>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
