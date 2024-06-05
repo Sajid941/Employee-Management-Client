@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form"
-import useAuth from './../hooks/useAuth';
 import toast from "react-hot-toast";
 import { Toaster } from 'react-hot-toast';
 import axios from "axios";
 import { updateProfile } from "firebase/auth";
-import useAxiosPublic from './../hooks/useAxiosPublic';
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
     const navigate = useNavigate()

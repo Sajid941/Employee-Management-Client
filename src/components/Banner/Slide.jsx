@@ -10,7 +10,7 @@ const Slide = ({ title, description, image }) => {
                     </Typewriter>
                 </h1>
                 <p className="text-[#737373]">{description}</p>
-                <button className="btn bg-[#202020] hover:bg-[#3d3d3d] text-white">Read more</button>
+                <button className="btn bg-[#202020] hover:bg-[#3d3d3d] text-white dark:bg-white dark:text-black">Read more</button>
             </div>
             <div className='px-5 mt-5'>
                 <img src={image} />

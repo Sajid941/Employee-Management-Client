@@ -1,0 +1,9 @@
+a.active{
+    color:#ff6700;
+}
+ul a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+}

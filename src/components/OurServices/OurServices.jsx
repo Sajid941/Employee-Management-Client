@@ -21,7 +21,7 @@ const OurServices = () => {
                                 <img src={service.image} alt="Shoes" className="rounded-xl" />
                             </figure>
                             <div className="card-body items-center text-center space-y-5">
-                                <h2 className="card-title text-mainColor">{service.title}</h2>
+                                <h2 className="card-title ">{service.title}</h2>
                                 <p>{service.description.slice(0, 101)} ...</p>
                                 <div className="card-actions">
                                     <button className="py-1 px-7 rounded-full bg-mainColor text-white">More</button>
@@ -31,7 +31,7 @@ const OurServices = () => {
                 }
             </div>
             <div className="flex justify-center mt-5">
-                <button className="bg-[#3d3d3d] text-white p-3 rounded-md ">More Services</button>
+                <button className="bg-[#3d3d3d] text-white p-3 rounded-md  dark:bg-white dark:text-black">More Services</button>
             </div>
         </div>
     );

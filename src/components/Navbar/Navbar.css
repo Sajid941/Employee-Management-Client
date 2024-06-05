@@ -1,4 +1,4 @@
-a.active{
+.navItem.active{
     color: #ff6700;
     font-weight: 500;
     border-bottom:2px solid #ff6700;
