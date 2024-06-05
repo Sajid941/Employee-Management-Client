@@ -171,9 +171,9 @@ const SignUp = () => {
                             </button>
                         </form>
                         <div className="flex items-center justify-center mt-4">
-                            <a className="text-xs text-gray-500  dark:text-gray-400 ">
+                            <p className="text-xs text-gray-500  dark:text-gray-400 ">
                                 Already have account? <Link to="/signIn" className="text-blue-600 hover:underline">Sign In</Link>
-                            </a>
+                            </p>
                         </div>
                     </div>
                 </div>
