@@ -22,7 +22,7 @@ const Dashboard = () => {
                         </label>
 
                     </div>
-                    <div className="drawer-side lg:rounded-lg lg:border dark:border-[#737373] lg:h-fit lg:shadow-lg">
+                    <div className="drawer-side lg:rounded-lg z-50 lg:border dark:border-[#737373] lg:h-fit lg:shadow-lg">
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className=" p-4 w-80 h-full lg:h-auto bg-white dark:bg-[#1d232a]  space-y-4">
                             {/* Sidebar content here */}
@@ -46,7 +46,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className="lg:flex-1">
+            <div className="lg:flex-1 flex justify-center items-center border-l">
                 <Outlet />
             </div>
         </div>
