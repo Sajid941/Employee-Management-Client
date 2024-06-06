@@ -4,12 +4,34 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form"
 import { format } from "date-fns";
+import useAxiosSecure from './../../hooks/useAxiosSecure';
+import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const WorkSheet = () => {
+    const {user}=useAuth()
     const { register, handleSubmit,  } = useForm()
     const [selectedDate, setSelectedDate] = useState(new Date())
+    const axiosSecure = useAxiosSecure()
     const date = format(selectedDate, "MM/dd/yy")
     const onSubmit = (data) => {
+        const workSheet = {
+            task:data.task,
+            hoursWorked:data.hoursWorked,
+            date,
+            email:user.email
+        }
+        axiosSecure.post('/workSheet',workSheet)
+        .then(res=>{
+            console.log(res.data);
+            if(res.data.insertedId){
+                toast.success("Submit Successfully")
+            }
+        })
+        .catch(error=>{
+            console.error(error)
+            toast.error(error.message)
+        })
         console.log(data, date);
     }
     return (
@@ -47,6 +69,7 @@ const WorkSheet = () => {
                                 <label className="text-gray-700 dark:text-gray-200" htmlFor="date">Date</label>
                                 <br />
                                 <DatePicker
+                                maxDate={new Date()}
                                     selected={selectedDate}
                                     onChange={date => setSelectedDate(date)}
                                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"

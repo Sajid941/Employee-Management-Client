@@ -6,6 +6,7 @@ import { FaSheetPlastic } from "react-icons/fa6";
 import { MdWorkHistory } from "react-icons/md";
 import { MdConnectWithoutContact } from "react-icons/md";
 import { MdHomeFilled } from "react-icons/md";
+import { Toaster } from "react-hot-toast";
 
 const Dashboard = () => {
     const theme = localStorage.getItem('theme')
@@ -49,6 +50,7 @@ const Dashboard = () => {
             <div className="lg:flex-1 flex justify-center items-center border-l">
                 <Outlet />
             </div>
+            <Toaster/>
         </div>
     );
 };
