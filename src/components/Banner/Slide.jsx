@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types'
-import { Typewriter } from 'react-simple-typewriter'
 
 const Slide = ({ title, description, image }) => {
     return (
         <div className="md:grid grid-cols-2 items-center  md:px-24 py-5 md:py-10 mt-5">
             <div className=" space-y-7 px-5">
-                <h1 className="text-2xl md:text-5xl font-bold">
-                    <Typewriter words={[title]}>
-                    </Typewriter>
-                </h1>
+                <h1 className="text-2xl md:text-5xl font-bold"> {title}</h1>
                 <p className="text-[#737373]">{description}</p>
                 <button className="btn bg-[#202020] hover:bg-[#3d3d3d] text-white dark:bg-white dark:text-black">Read more</button>
             </div>
