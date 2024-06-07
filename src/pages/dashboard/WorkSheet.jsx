@@ -14,7 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 const WorkSheet = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const { register, handleSubmit, } = useForm()
+    const { register, handleSubmit, reset } = useForm()
     const [selectedDate, setSelectedDate] = useState(new Date())
 
     const { data: workSheets = [], refetch } = useQuery({
@@ -38,6 +38,7 @@ const WorkSheet = () => {
             .then(res => {
                 if (res.data.insertedId) {
                     refetch()
+                    reset()
                     toast.success("Submit Successfully")
                 }
             })

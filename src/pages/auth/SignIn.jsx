@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 import SocialSignIn from "../../components/SocialSignIn/SocialSignIn";
 
 const SignIn = () => {
+    const location =useLocation()
     const navigate= useNavigate()
+    console.log(location);
     const {logIn} = useAuth()
     const { register, handleSubmit } = useForm()
     const onSubmit = (data) => {
@@ -13,7 +15,7 @@ const SignIn = () => {
         .then(result=>{
             if(result.user){
                 toast.success('Logged in successfully')
-                navigate('/')
+                navigate(location?.state ? location.state : "/")
             }
         })
         .catch(error=>{

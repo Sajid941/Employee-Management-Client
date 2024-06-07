@@ -6,6 +6,7 @@ import SignUp from "../pages/auth/SignUp";
 import SignIn from "../pages/auth/SignIn";
 import Dashboard from "../layout/Dashboard";
 import WorkSheet from "../pages/dashboard/WorkSheet";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
     },
     {
         path:'dashboard',
-        element: <Dashboard/>,
+        element: <PrivateRoute><Dashboard/></PrivateRoute>,
         errorElement:<ErrorPage/>,
         children:[
             {
