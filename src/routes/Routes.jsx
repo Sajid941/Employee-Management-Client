@@ -7,6 +7,7 @@ import SignIn from "../pages/auth/SignIn";
 import Dashboard from "../layout/Dashboard";
 import WorkSheet from "../pages/dashboard/WorkSheet";
 import PrivateRoute from "./PrivateRoute";
+import EmployeeList from "../pages/dashboard/EmployeeList";
 
 const router = createBrowserRouter([
     {
@@ -34,9 +35,16 @@ const router = createBrowserRouter([
         element: <PrivateRoute><Dashboard/></PrivateRoute>,
         errorElement:<ErrorPage/>,
         children:[
+            //employee route
             {
                 path:'workSheet',
                 element:<WorkSheet/>
+            },
+
+            //HR route
+            {
+                path:'employeeList',
+                element:<EmployeeList/>
             }
         ]
     }

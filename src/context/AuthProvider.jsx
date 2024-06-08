@@ -40,7 +40,11 @@ const AuthProvider = ({ children }) => {
                     console.log(res.data);
                 })
             }else{
-                //TODO: remove token
+                //remove token
+                axiosSecure.delete('/jwt')
+                .then(res=>{
+                    console.log(res.data);
+                })
             }
 
             setLoading(false)

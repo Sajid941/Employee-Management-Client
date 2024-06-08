@@ -24,7 +24,6 @@ const SignUp = () => {
                 }
             }
         )
-        console.log(res.data.success);
 
         const userInfo = {
             name: data.name,
@@ -34,11 +33,15 @@ const SignUp = () => {
             salary: data.salary,
             bankAccount: data.bankAccount,
             role: selectedAccount,
+            isVerified: false
         }
 
         createUser(data.email, data.password)
             .then(result => {
                 if (result.user) {
+                    toast.success('Sign Up successfully')
+                    navigate('/')
+                    reset()
                     if (res.data.success) {
                         updateProfile(result.user, {
                             displayName: data.name,
@@ -51,12 +54,8 @@ const SignUp = () => {
                                 console.log(res.data);
                             })
                     }
-                    toast.success('Sign Up successfully')
-                    navigate('/')
-                    reset()
                 }
             })
-        console.log(data);
     }
     return (
         <section className="bg-white dark:bg-gray-900">
@@ -114,7 +113,9 @@ const SignUp = () => {
                                     <select {...register('designation', { required: true })} defaultValue="default" name="" id="" className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40">
                                         <option defaultValue="Sales Assistant">Sales Assistant</option>
                                         <option value="Social Media executive">Social Media executive</option>
-                                        <option value=" Digital Marketer"> Digital Marketer</option>
+                                        <option value="Digital Marketer"> Digital Marketer</option>
+                                        <option value="Web Developer"> Web Developer</option>
+                                        <option value="App developer"> App developer</option>
                                     </select>
                                     {errors.designation?.type === 'required' && <span className="text-red-600">This field is required</span>}
                                 </div>

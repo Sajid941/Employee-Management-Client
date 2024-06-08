@@ -24,7 +24,6 @@ const SignIn = () => {
                 toast.error("Incorrect Email/Password")
             }
         })
-        console.log(data);
     }
     return (
         <div className="flex justify-center items-center w-full h-screen">

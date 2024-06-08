@@ -6,11 +6,17 @@ import { FaSheetPlastic } from "react-icons/fa6";
 import { MdWorkHistory } from "react-icons/md";
 import { MdConnectWithoutContact } from "react-icons/md";
 import { MdHomeFilled } from "react-icons/md";
+import { FaUsers } from "react-icons/fa6";
+import { TbListDetails } from "react-icons/tb";
+import { RiProgress3Fill } from "react-icons/ri";
 import { Toaster } from "react-hot-toast";
+import 'sweetalert2/src/sweetalert2.scss'
 
 const Dashboard = () => {
     const theme = localStorage.getItem('theme')
     const { user } = useAuth()
+    const isEmployee = false
+    const isHR = true
     return (
         <div className={`${theme === "true" ? "dark" : ""} text-[#151515] dark:text-white  lg:flex bg-[#f7f8fa] dark:bg-[#1d232a] h-screen`}>
             <div>
@@ -33,12 +39,25 @@ const Dashboard = () => {
                                 <h4 className="text-2xl text-[#151515] dark:text-white">Hello, {user?.displayName}</h4>
                             </div>
 
-                            <hr className="dark:border-[#737373]"/>
+                            <hr className="dark:border-[#737373]" />
                             {/* Links */}
-                            <li><NavLink to="/dashboard/workSheet"><FaSheetPlastic size={20} /> Work Sheet</NavLink></li>
-                            <li><NavLink to="/dashboard/paymentHistory"><MdWorkHistory size={20} />Payment History</NavLink></li>
+                            {
+                                isEmployee &&
+                                <>
+                                    <li><NavLink to="/dashboard/workSheet"><FaSheetPlastic size={20} /> Work Sheet</NavLink></li>
+                                    <li><NavLink to="/dashboard/paymentHistory"><MdWorkHistory size={20} />Payment History</NavLink></li>
+                                </>
+                            }
+                            {
+                                isHR &&
+                                <>
+                                    <li><NavLink to="/dashboard/employeeList"><FaUsers size={20} />Employee List</NavLink></li>
+                                    <li><NavLink to="/dashboard/details"><TbListDetails size={20} />Details</NavLink></li>
+                                    <li><NavLink to="/dashboard/progress"><RiProgress3Fill size={20} />Progress</NavLink></li>
+                                </>
+                            }
 
-                            <hr className="dark:border-[#737373]"/>
+                            <hr className="dark:border-[#737373]" />
 
                             <li><NavLink to="/"><MdHomeFilled size={20} />Home</NavLink></li>
                             <li><NavLink to="/"><MdConnectWithoutContact size={20} />Contact Us</NavLink></li>
@@ -47,10 +66,10 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className="lg:flex-1 flex justify-center items-center border-l">
+            <div className="lg:flex-1 flex justify-center mt-10 lg:border-l">
                 <Outlet />
             </div>
-            <Toaster/>
+            <Toaster />
         </div>
     );
 };
