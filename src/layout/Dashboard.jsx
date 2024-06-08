@@ -11,12 +11,13 @@ import { TbListDetails } from "react-icons/tb";
 import { RiProgress3Fill } from "react-icons/ri";
 import { Toaster } from "react-hot-toast";
 import 'sweetalert2/src/sweetalert2.scss'
+import useUserRole from "../hooks/useUserRole";
 
 const Dashboard = () => {
     const theme = localStorage.getItem('theme')
     const { user } = useAuth()
-    const isEmployee = false
-    const isHR = true
+    const {userRole}=useUserRole()
+
     return (
         <div className={`${theme === "true" ? "dark" : ""} text-[#151515] dark:text-white  lg:flex bg-[#f7f8fa] dark:bg-[#1d232a] h-screen`}>
             <div>
@@ -42,14 +43,14 @@ const Dashboard = () => {
                             <hr className="dark:border-[#737373]" />
                             {/* Links */}
                             {
-                                isEmployee &&
+                                userRole === 'employee' &&
                                 <>
                                     <li><NavLink to="/dashboard/workSheet"><FaSheetPlastic size={20} /> Work Sheet</NavLink></li>
                                     <li><NavLink to="/dashboard/paymentHistory"><MdWorkHistory size={20} />Payment History</NavLink></li>
                                 </>
                             }
                             {
-                                isHR &&
+                                userRole === 'hr' &&
                                 <>
                                     <li><NavLink to="/dashboard/employeeList"><FaUsers size={20} />Employee List</NavLink></li>
                                     <li><NavLink to="/dashboard/details"><TbListDetails size={20} />Details</NavLink></li>

@@ -4,9 +4,11 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useUserRole from "../../hooks/useUserRole";
 
 const Navbar = ({ theme, setTheme }) => {
-    const { user,logOut } = useAuth()
+    const { user, logOut } = useAuth()
+    const { userRole } = useUserRole()
     const [showNavbar, setShowNavbar] = useState(true)
     const [lastScrollY, setLastScrollY] = useState(0)
     useEffect(() => {
@@ -24,15 +26,22 @@ const Navbar = ({ theme, setTheme }) => {
         }
     }, [lastScrollY])
 
-    const handleLogOut = ()=>{
+    const handleLogOut = () => {
         logOut()
-        .then(()=>{
-            toast.success('Logged out successfully')
-        })
+            .then(() => {
+                toast.success('Logged out successfully')
+            })
     }
     const navLinks = <>
         <li><NavLink className="navItem" to="/">Home</NavLink></li>
-        <li><NavLink className="navItem" to="/dashboard/workSheet">Dashboard</NavLink></li>
+        {
+            userRole === 'employee' &&
+            <li><NavLink className="navItem" to="/dashboard/workSheet">Dashboard</NavLink></li>
+        }
+        {
+            userRole === 'hr' &&
+            <li><NavLink className="navItem" to="/dashboard/employeeList">Dashboard</NavLink></li>
+        }
         <li><NavLink className="navItem" to="/contactUs">Contact Us</NavLink></li>
     </>
     return (

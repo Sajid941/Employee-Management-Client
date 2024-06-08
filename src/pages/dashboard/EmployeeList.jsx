@@ -45,6 +45,17 @@ const EmployeeList = () => {
 
     }
 
+    const handlePay = id =>{
+        axiosSecure.post('/pay',{id})
+        .then(res=>{
+            console.log(res.data);
+        })
+        .catch(error=>{
+
+            console.error(error)
+        })
+    }
+
     const data = useMemo(() => users, [users])
     const columnHelper = createColumnHelper()
     const columns = [
@@ -93,7 +104,7 @@ const EmployeeList = () => {
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         </form>
                         <h3 className="font-bold text-lg">Pay {row.original.name}</h3>
-                        <button className="btn">Pay</button>
+                        <button onClick={()=>handlePay(row.original._id)} className="btn">{row.original._id}</button>
                     </div>
                 </dialog>
             </div>,
