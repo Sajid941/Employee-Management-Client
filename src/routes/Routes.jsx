@@ -8,6 +8,7 @@ import Dashboard from "../layout/Dashboard";
 import WorkSheet from "../pages/dashboard/WorkSheet";
 import PrivateRoute from "./PrivateRoute";
 import EmployeeList from "../pages/dashboard/EmployeeList";
+import Payment from "../pages/Payment";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path:'employeeList',
                 element:<EmployeeList/>
+            },
+            {
+                path:'payment/:id',
+                element:<Payment/>
             }
         ]
     }

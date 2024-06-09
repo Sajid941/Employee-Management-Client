@@ -7,9 +7,11 @@ import {
     getCoreRowModel,
     useReactTable,
 } from '@tanstack/react-table'
+
 import toast from "react-hot-toast";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
+import { Link } from "react-router-dom";
 
 const EmployeeList = () => {
     const axiosSecure = useAxiosSecure()
@@ -45,16 +47,6 @@ const EmployeeList = () => {
 
     }
 
-    const handlePay = id =>{
-        axiosSecure.post('/pay',{id})
-        .then(res=>{
-            console.log(res.data);
-        })
-        .catch(error=>{
-
-            console.error(error)
-        })
-    }
 
     const data = useMemo(() => users, [users])
     const columnHelper = createColumnHelper()
@@ -96,17 +88,8 @@ const EmployeeList = () => {
         columnHelper.display({
             // cell: ({ row }) => <button disabled={!row.original.isVerified} className="btn btn-xs bg-[#374151] hover:bg-[#506079] text-white">Pay</button>,
             cell: ({ row }) => <div>
-                < button disabled={!row.original.isVerified} className="btn btn-xs border-0 bg-[#374151] hover:bg-[#506079] text-white" onClick={() => document.getElementById('my_modal_'+row.original._id).showModal()}>Pay</button >
-                <dialog id={"my_modal_"+row.original._id} className="modal">
-                    <div className="modal-box">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                        </form>
-                        <h3 className="font-bold text-lg">Pay {row.original.name}</h3>
-                        <button onClick={()=>handlePay(row.original._id)} className="btn">{row.original._id}</button>
-                    </div>
-                </dialog>
+                < Link to={`/dashboard/payment/${row.original.email}`} disabled={!row.original.isVerified} className="btn btn-xs border-0 bg-[#374151] hover:bg-[#506079] text-white" >Pay</Link   >
+
             </div>,
             header: "Action"
         }),
