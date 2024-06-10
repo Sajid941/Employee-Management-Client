@@ -13,6 +13,8 @@ import PaymentHistory from "../pages/dashboard/PaymentHistory";
 import Details from "../pages/dashboard/Details";
 import Progress from "../pages/dashboard/Progress";
 import AllEmployeeList from "../pages/dashboard/AllEmployeeList";
+import ContactUs from "../pages/ContactUs";
+import ContactMessage from "../pages/dashboard/ContactMessage";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
                 path: '/',
                 element: <Home />
             },
+            {
+                path:'/contactUs',
+                element:<ContactUs/>
+            }
 
         ]
     },
@@ -73,6 +79,10 @@ const router = createBrowserRouter([
             {
                 path: 'allEmployeeList',
                 element: <AllEmployeeList />
+            },
+            {
+                path:'contactMessage',
+                element:<ContactMessage/>
             }
         ]
     }

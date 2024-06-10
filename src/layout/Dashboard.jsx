@@ -59,6 +59,7 @@ const Dashboard = () => {
                                 userRole === 'admin' &&
                                 <>
                                     <li><NavLink to="/dashboard/allEmployeeList"><FaUsers size={20} />All Employee List</NavLink></li>
+                                    <li><NavLink to="/dashboard/contactMessage"><FaUsers size={20} />Contact Message</NavLink></li>
                                 </>
                             }
 
