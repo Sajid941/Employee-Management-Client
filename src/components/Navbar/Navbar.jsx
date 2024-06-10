@@ -42,6 +42,10 @@ const Navbar = ({ theme, setTheme }) => {
             userRole === 'hr' &&
             <li><NavLink className="navItem" to="/dashboard/employeeList">Dashboard</NavLink></li>
         }
+        {
+            userRole === 'admin' &&
+            <li><NavLink className="navItem" to="/dashboard/allEmployeeList">Dashboard</NavLink></li>
+        }
         <li><NavLink className="navItem" to="/contactUs">Contact Us</NavLink></li>
     </>
     return (

@@ -89,7 +89,7 @@ const EmployeeList = () => {
         }),
         columnHelper.display({
             cell: ({row}) => <Link to={`/dashboard/details/${row.original.email}`}  className="btn btn-xs">Details</Link>,
-            header: "Action"
+            header: "Details"
         }),
     ]
 

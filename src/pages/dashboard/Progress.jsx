@@ -40,7 +40,7 @@ const Progress = () => {
             header: "Tasks"
         }),
         columnHelper.accessor("hoursWorked", {
-            cell: info => <span>{info.getValue()}h</span>,
+            cell: info => <span>{info.getValue()}</span>,
             header: "Hours Worked"
         }),
         columnHelper.accessor("date", {

@@ -55,6 +55,12 @@ const Dashboard = () => {
                                     <li><NavLink to="/dashboard/progress"><RiProgress3Fill size={20} />Progress</NavLink></li>
                                 </>
                             }
+                            {
+                                userRole === 'admin' &&
+                                <>
+                                    <li><NavLink to="/dashboard/allEmployeeList"><FaUsers size={20} />All Employee List</NavLink></li>
+                                </>
+                            }
 
                             <hr className="dark:border-[#737373]" />
 

@@ -12,60 +12,67 @@ import Payment from "../pages/dashboard/Payment";
 import PaymentHistory from "../pages/dashboard/PaymentHistory";
 import Details from "../pages/dashboard/Details";
 import Progress from "../pages/dashboard/Progress";
+import AllEmployeeList from "../pages/dashboard/AllEmployeeList";
 
 const router = createBrowserRouter([
     {
-        path:'/',
-        element:<Main/>,
-        errorElement:<ErrorPage/>,
-        children:[
+        path: '/',
+        element: <Main />,
+        errorElement: <ErrorPage />,
+        children: [
             {
-                path:'/',
-                element:<Home/>
+                path: '/',
+                element: <Home />
             },
 
         ]
     },
     {
-        path:'/signUp',
-        element:<SignUp/>
+        path: '/signUp',
+        element: <SignUp />
     },
     {
-        path:'/signIn',
-        element:<SignIn/>
+        path: '/signIn',
+        element: <SignIn />
     },
     {
-        path:'dashboard',
-        element: <PrivateRoute><Dashboard/></PrivateRoute>,
-        errorElement:<ErrorPage/>,
-        children:[
+        path: 'dashboard',
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
+        errorElement: <ErrorPage />,
+        children: [
             //employee route
             {
-                path:'workSheet',
-                element:<WorkSheet/>
+                path: 'workSheet',
+                element: <WorkSheet />
             },
             {
-                path:'paymentsHistory',
-                element:<PaymentHistory/>
+                path: 'paymentsHistory',
+                element: <PaymentHistory />
             },
 
             //HR route
             {
-                path:'employeeList',
-                element:<EmployeeList/>
+                path: 'employeeList',
+                element: <EmployeeList />
             },
             {
-                path:'payment/:email',
-                element:<Payment/>
+                path: 'payment/:email',
+                element: <Payment />
             },
             {
-                path:'details/:email',
-                element:<Details/>,
-                loader:({params})=>fetch(`http://localhost:5000/payments/${params.email}`)
+                path: 'details/:email',
+                element: <Details />,
+                loader: ({ params }) => fetch(`http://localhost:5000/payments/${params.email}`)
             },
             {
-                path:'progress',
-                element:<Progress/>
+                path: 'progress',
+                element: <Progress />
+            },
+
+            //Admin route
+            {
+                path: 'allEmployeeList',
+                element: <AllEmployeeList />
             }
         ]
     }

@@ -25,20 +25,21 @@ const SignUp = () => {
             }
         )
 
-        const userInfo = {
-            name: data.name,
-            email: data.email,
-            photo: res.data.data.display_url,
-            designation: data.designation,
-            salary: data.salary,
-            bankAccount: data.bankAccount,
-            role: selectedAccount,
-            isVerified: false
-        }
 
         createUser(data.email, data.password)
             .then(result => {
                 if (result.user) {
+                    const userInfo = {
+                        name: data.name,
+                        email: data.email,
+                        photo: res.data.data.display_url,
+                        designation: data.designation,
+                        salary: data.salary,
+                        bankAccount: data.bankAccount,
+                        role: selectedAccount,
+                        isVerified: false,
+                        uid:result.user.uid
+                    }
                     toast.success('Sign Up successfully')
                     navigate('/')
                     reset()

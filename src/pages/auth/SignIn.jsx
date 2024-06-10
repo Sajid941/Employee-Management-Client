@@ -7,7 +7,7 @@ import SocialSignIn from "../../components/SocialSignIn/SocialSignIn";
 const SignIn = () => {
     const location =useLocation()
     const navigate= useNavigate()
-    console.log(location);
+
     const {logIn} = useAuth()
     const { register, handleSubmit } = useForm()
     const onSubmit = (data) => {
