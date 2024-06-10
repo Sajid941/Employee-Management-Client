@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import EmployeeList from "../pages/dashboard/EmployeeList";
 import Payment from "../pages/dashboard/Payment";
 import PaymentHistory from "../pages/dashboard/PaymentHistory";
+import Details from "../pages/dashboard/Details";
 
 const router = createBrowserRouter([
     {
@@ -53,8 +54,13 @@ const router = createBrowserRouter([
                 element:<EmployeeList/>
             },
             {
-                path:'payment/:id',
+                path:'payment/:email',
                 element:<Payment/>
+            },
+            {
+                path:'details/:email',
+                element:<Details/>,
+                loader:({params})=>fetch(`http://localhost:5000/payments/${params.email}`)
             }
         ]
     }

@@ -110,8 +110,8 @@ const SignUp = () => {
                                 </div>
                                 <div>
                                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Designation</label>
-                                    <select {...register('designation', { required: true })} defaultValue="default" name="" id="" className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40">
-                                        <option defaultValue="Sales Assistant">Sales Assistant</option>
+                                    <select {...register('designation', { required: true })} className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40">
+                                        <option value="Sales Assistant">Sales Assistant</option>
                                         <option value="Social Media executive">Social Media executive</option>
                                         <option value="Digital Marketer"> Digital Marketer</option>
                                         <option value="Web Developer"> Web Developer</option>

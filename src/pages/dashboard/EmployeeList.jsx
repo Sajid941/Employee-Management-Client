@@ -87,8 +87,8 @@ const EmployeeList = () => {
             </div>,
             header: "Action"
         }),
-        columnHelper.accessor('details', {
-            cell: () => <button className="btn btn-xs">Details</button>,
+        columnHelper.display({
+            cell: ({row}) => <Link to={`/dashboard/details/${row.original.email}`}  className="btn btn-xs">Details</Link>,
             header: "Action"
         }),
     ]
