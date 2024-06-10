@@ -7,7 +7,6 @@ import { MdWorkHistory } from "react-icons/md";
 import { MdConnectWithoutContact } from "react-icons/md";
 import { MdHomeFilled } from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
-import { TbListDetails } from "react-icons/tb";
 import { RiProgress3Fill } from "react-icons/ri";
 import { Toaster } from "react-hot-toast";
 import 'sweetalert2/src/sweetalert2.scss'
@@ -46,14 +45,13 @@ const Dashboard = () => {
                                 userRole === 'employee' &&
                                 <>
                                     <li><NavLink to="/dashboard/workSheet"><FaSheetPlastic size={20} /> Work Sheet</NavLink></li>
-                                    <li><NavLink to="/dashboard/paymentHistory"><MdWorkHistory size={20} />Payment History</NavLink></li>
+                                    <li><NavLink to="/dashboard/paymentsHistory"><MdWorkHistory size={20} />Payment History</NavLink></li>
                                 </>
                             }
                             {
                                 userRole === 'hr' &&
                                 <>
                                     <li><NavLink to="/dashboard/employeeList"><FaUsers size={20} />Employee List</NavLink></li>
-                                    <li><NavLink to="/dashboard/details"><TbListDetails size={20} />Details</NavLink></li>
                                     <li><NavLink to="/dashboard/progress"><RiProgress3Fill size={20} />Progress</NavLink></li>
                                 </>
                             }

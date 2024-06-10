@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMemo } from "react";
 import {
@@ -12,16 +11,11 @@ import toast from "react-hot-toast";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { Link } from "react-router-dom";
+import useUser from "../../hooks/useUser";
 
 const EmployeeList = () => {
     const axiosSecure = useAxiosSecure()
-    const { data: users = [], refetch } = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            const res = await axiosSecure('/users')
-            return res.data
-        }
-    })
+    const {users,refetch}=useUser()
 
     const handleVerified = (id, name) => {
 

@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const CheckoutFrom = ({ email }) => {
+const CheckoutFrom = ({ email, salary }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [errorMessage, setErrorMessage] = useState("");
   const stripe = useStripe()
@@ -16,16 +16,15 @@ const CheckoutFrom = ({ email }) => {
   const axiosSecure = useAxiosSecure()
   const [clintSecret, setClintSecret] = useState("")
   useEffect(() => {
-    if (email) {
-      axiosSecure.post('/create-payment-intent', { email })
+    if (salary > 0) {
+      axiosSecure.post('/create-payment-intent', { salary })
         .then(res => {
           setClintSecret(res.data.clientSecret)
         })
     }
-  }, [axiosSecure, email])
+  }, [axiosSecure, salary])
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target.date.value);
     if (!stripe || !elements) {
       return;
     }
@@ -58,17 +57,18 @@ const CheckoutFrom = ({ email }) => {
       console.error(err);
     }
     else {
-      console.log(paymentIntent);
       if (paymentIntent.status === "succeeded") {
         toast.success('payment success')
-        const payment = {
-          email: email,
-          date:e.target.date.value,
-          transitionId: paymentIntent.id,
+        if (salary > 0) {
+          const payment = {
+            email,
+            salary,
+            date: e.target.date.value,
+            transitionId: paymentIntent.id,
+          }
+          const res = await axiosSecure.post('/payments', payment)
+          console.log(res.data);
         }
-        e.target.reset()
-        const res = await axiosSecure.post('/payments', payment)
-        console.log(res.data);
       }
       else {
         toast.error('payment unsuccess')
@@ -124,5 +124,6 @@ const CheckoutFrom = ({ email }) => {
 
 export default CheckoutFrom;
 CheckoutFrom.propTypes = {
-  email: PropTypes.string
+  email: PropTypes.string,
+  salary: PropTypes.number
 }
