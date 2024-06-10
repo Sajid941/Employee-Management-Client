@@ -18,7 +18,7 @@ const WorkSheet = () => {
     const [selectedDate, setSelectedDate] = useState(new Date())
 
     const { data: workSheets = [], refetch } = useQuery({
-        queryKey: ["work sheet"],
+        queryKey: ["work sheet",user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/workSheet?email=${user?.email}`)
             return res.data

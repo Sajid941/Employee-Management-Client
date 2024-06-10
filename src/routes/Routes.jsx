@@ -11,6 +11,7 @@ import EmployeeList from "../pages/dashboard/EmployeeList";
 import Payment from "../pages/dashboard/Payment";
 import PaymentHistory from "../pages/dashboard/PaymentHistory";
 import Details from "../pages/dashboard/Details";
+import Progress from "../pages/dashboard/Progress";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
                 path:'details/:email',
                 element:<Details/>,
                 loader:({params})=>fetch(`http://localhost:5000/payments/${params.email}`)
+            },
+            {
+                path:'progress',
+                element:<Progress/>
             }
         ]
     }
