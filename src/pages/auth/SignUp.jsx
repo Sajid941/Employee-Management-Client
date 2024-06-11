@@ -25,7 +25,6 @@ const SignUp = () => {
             }
         )
 
-
         createUser(data.email, data.password)
             .then(result => {
                 if (result.user) {
