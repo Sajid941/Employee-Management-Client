@@ -71,7 +71,7 @@ const router = createBrowserRouter([
             {
                 path: 'details/:email',
                 element: <HrRoute><Details /></HrRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/payments/${params.email}`)
+                loader: ({ params }) => fetch(`https://employee-management-server-phi.vercel.app/payments/${params.email}`)
             },
             {
                 path: 'progress',
