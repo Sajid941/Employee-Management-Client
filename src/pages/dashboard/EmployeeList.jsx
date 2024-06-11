@@ -15,7 +15,7 @@ import useUser from "../../hooks/useUser";
 
 const EmployeeList = () => {
     const axiosSecure = useAxiosSecure()
-    const {users,refetch}=useUser()
+    const { users, refetch } = useUser()
 
     const handleVerified = (id, name) => {
 
@@ -88,7 +88,7 @@ const EmployeeList = () => {
             header: "Action"
         }),
         columnHelper.display({
-            cell: ({row}) => <Link to={`/dashboard/details/${row.original.email}`}  className="btn btn-xs">Details</Link>,
+            cell: ({ row }) => <Link to={`/dashboard/details/${row.original.email}`} className="btn btn-xs">Details</Link>,
             header: "Details"
         }),
     ]
@@ -98,6 +98,7 @@ const EmployeeList = () => {
     return (
         <div className="w-full mx-5  lg:mx-10 ">
             <SectionTitle subHeading="Pay Fast" heading="Employee List" />
+
             <div className="overflow-x-auto">
                 <table className="table mt-20 ">
                     <thead className="dark:text-white">
@@ -136,6 +137,7 @@ const EmployeeList = () => {
                     </tbody>
                 </table>
             </div>
+
         </div>
     );
 };

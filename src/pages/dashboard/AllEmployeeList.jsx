@@ -9,8 +9,8 @@ const AllEmployeeList = () => {
     const axiosSecure = useAxiosSecure()
 
     const { users, refetch, } = useAllUsers()
-    const handleMakeHr = (id, name , role) => {
-        if(role === "hr"){
+    const handleMakeHr = (id, name, role) => {
+        if (role === "hr") {
             return toast.error('ALready HR')
         }
         Swal.fire({
@@ -96,7 +96,7 @@ const AllEmployeeList = () => {
             cell: ({ row }) => <div>
                 <button
                     onClick={() => handleMakeHr(row?.original?._id, row?.original?.name, row.original.role)}
-                    disabled={ row.original.isFired}
+                    disabled={row.original.isFired}
                     className="btn border-0 btn-xs bg-green-500 hover:bg-green-400">
                     {row.original.role === 'hr' ? "HR" : "Make HR"}
                 </button>
@@ -128,7 +128,7 @@ const AllEmployeeList = () => {
                     <div className="modal-box">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn border-0 btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            <button className="btn border-0 btn-sm btn-circle btn-ghost dark:bg-black absolute right-2 top-2">✕</button>
                         </form>
                         <div>
                             <form onSubmit={handleSalary}>
@@ -138,16 +138,22 @@ const AllEmployeeList = () => {
                                     value={row.original._id}
                                     name="id"
                                 />
+                                <div className="flex gap-2  items-center text-[#151515]">
+                                    <img className="w-12 h-12 rounded-full object-cover" src={row.original.photo} alt="Sender" />
+                                    <div>
+                                        <p className="text-[13px">{row.original.name ? row.original.name : row.original.email.split('@')[0]}</p>
+                                        <p className="text-xs ">{row.original.email}</p>
+                                    </div>
+                                </div>
                                 <div>
-                                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Salary</label>
                                     <input type="number"
                                         min={row.original.salary}
                                         name="salary"
                                         defaultValue={row.original.salary}
                                         required
-                                        className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                        className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg  focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                                 </div>
-                                <button className="py-4 btn">Adjust</button>
+                                <button className="py-4 btn">Adjust Salary</button>
                             </form>
                         </div>
                     </div>
@@ -164,43 +170,47 @@ const AllEmployeeList = () => {
     })
 
     return (
-        <div className=" w-full mt-16 space-y-5 lg:mx-10">
+        <div className=" w-full lg:mt-16 space-y-5 lg:mx-10">
             <h1 className="text-2xl text-center font-medium">All EmploYee List</h1>
-            <table className="table border p-5 rounded-md">
-                <thead className="dark:text-white">
-                    {
-                        table.getHeaderGroups().map(headerGroups => (
-                            <tr key={headerGroups.id}>
-                                {headerGroups.headers.map(header => (
-                                    <th key={header.id}>
-                                        {
-                                            header.isPlaceholder ?
-                                                null :
-                                                flexRender(header.column.columnDef.header,
-                                                    header.getContext())
-                                        }
-                                    </th>
-                                ))}
-                            </tr>
-                        ))
-                    }
-                </thead>
-                <tbody>
-                    {
-                        table.getRowModel().rows.map(row => (
-                            <tr key={row.id}>
-                                {
-                                    row.getVisibleCells().map(cell => (
-                                        <td key={cell.id}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </td>
-                                    ))
-                                }
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+            <div className="overflow-x-auto">
+                <table className="table ">
+                    <thead className="dark:text-white">
+                        {
+                            table.getHeaderGroups().map(headerGroups => (
+                                <tr key={headerGroups.id}>
+                                    {
+                                        headerGroups.headers.map(header => (
+                                            <th key={header.id}>
+                                                {
+                                                    flexRender(header.column.columnDef.header, header.getContext())
+                                                }
+                                            </th>
+                                        ))
+                                    }
+                                </tr>
+                            ))
+                        }
+                    </thead>
+                    <tbody>
+                        {
+                            table.getRowModel().rows.map(row => (
+                                <tr key={row.id}>
+                                    {
+                                        row.getVisibleCells().map(cell => (
+                                            <td key={cell.id}>
+                                                {
+                                                    flexRender(cell.column.columnDef.cell, cell.getContext())
+                                                }
+                                            </td>
+                                        ))
+                                    }
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     );
 };

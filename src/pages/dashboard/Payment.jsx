@@ -12,7 +12,7 @@ const Payment = () => {
     const currentUser = users?.filter(user => user.email === email)[0]
     const salary = parseInt(currentUser?.salary)
     return (
-        <div className="flex justify-center items-center w-full">
+        <div className="flex justify-center items-center w-full text-[#151515]">
             <div className="modal-box space-y-4 w-full ">
                 <form method="dialog">
                     {/* if there is a button in form, it will close the modal */}

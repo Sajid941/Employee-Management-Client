@@ -29,7 +29,7 @@ const ContactUs = () => {
         })
     }
     return (
-        <section className="bg-white dark:bg-gray-900">
+        <section className="bg-white dark:bg-[#1d232a]">
             <Helmet>
                 <title>Contact Us | LogiLink Labs</title>
             </Helmet>

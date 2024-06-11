@@ -9,7 +9,7 @@ const AdminRoute = ({ children }) => {
     const { user, loading, logOut } = useAuth()
     const { pathname } = useLocation()
     const axiosSecure = useAxiosSecure()
-    const { data: role = [], isPending } = useQuery({
+    const { data: role = [], isPending ,refetch } = useQuery({
         queryKey: ['user role', user?.email],
         queryFn: async () => {
             const res = await axiosSecure(`/users/checkRole/${user?.email}`)
@@ -17,13 +17,14 @@ const AdminRoute = ({ children }) => {
         }
     })
     if (loading || isPending) {
+        refetch()
         return <Loader />
     }
     if (user && role?.role === "admin") {
         return children;
     }
     return <>
-        {/* {logOut()} */}
+        {logOut()}
         <Navigate to="/signIn" state={pathname} />
     </>
 };
