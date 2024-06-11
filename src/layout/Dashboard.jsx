@@ -11,14 +11,18 @@ import { RiProgress3Fill } from "react-icons/ri";
 import { Toaster } from "react-hot-toast";
 import 'sweetalert2/src/sweetalert2.scss'
 import useUserRole from "../hooks/useUserRole";
+import { Helmet } from "react-helmet";
 
 const Dashboard = () => {
     const theme = localStorage.getItem('theme')
     const { user } = useAuth()
-    const {userRole}=useUserRole()
+    const { userRole } = useUserRole()
 
     return (
         <div className={`${theme === "true" ? "dark" : ""} text-[#151515] dark:text-white  lg:flex bg-[#f7f8fa] dark:bg-[#1d232a] h-screen`}>
+            <Helmet>
+                <title>Dashboard | LogiLink Labs</title>
+            </Helmet>
             <div>
                 <div className="drawer lg:drawer-open lg:m-7  rounded-lg ">
                     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -66,7 +70,11 @@ const Dashboard = () => {
                             <hr className="dark:border-[#737373]" />
 
                             <li><NavLink to="/"><MdHomeFilled size={20} />Home</NavLink></li>
-                            <li><NavLink to="/"><MdConnectWithoutContact size={20} />Contact Us</NavLink></li>
+                            {
+                                userRole === 'admin' ?
+                                    undefined :
+                                    <li><NavLink to="/contactUs"><MdConnectWithoutContact size={20} />Contact Us</NavLink></li>
+                            }
                         </ul>
 
                     </div>

@@ -115,7 +115,7 @@ const AllEmployeeList = () => {
 
     return (
         <div className=" w-full mt-16 space-y-5 lg:mx-10">
-            <h1 className="text-2xl text-center font-medium">Submitted Work Sheet</h1>
+            <h1 className="text-2xl text-center font-medium">All EmploYee List</h1>
             <table className="table border p-5 rounded-md">
                 <thead>
                     {

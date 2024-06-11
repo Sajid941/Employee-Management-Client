@@ -1,6 +1,10 @@
+import toast from "react-hot-toast";
+import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet";
 
 const ContactUs = () => {
+    const {user} = useAuth()
     const axiosPublic = useAxiosPublic()
     const handleSendContactMessage = e =>{
         e.preventDefault()
@@ -12,15 +16,23 @@ const ContactUs = () => {
         const info = {
             email,
             subject,
-            description
+            description,
+            photo: user?.photoURL,
+            name:user?.displayName
         }
         axiosPublic.post('/contactMessage',info)
         .then(res=>{
-            console.log(res.data);
+            if(res.data.insertedId){
+                form.reset()
+                toast.success('message send successfully')
+            }
         })
     }
     return (
         <section className="bg-white dark:bg-gray-900">
+            <Helmet>
+                <title>Contact Us | LogiLink Labs</title>
+            </Helmet>
             <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
                 <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
                 <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
@@ -33,6 +45,7 @@ const ContactUs = () => {
                             type="email"
                             id="email"
                             name="email"
+                            defaultValue={user?.email && user?.email}
                             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
                             placeholder="name@flowbite.com"
                             required
