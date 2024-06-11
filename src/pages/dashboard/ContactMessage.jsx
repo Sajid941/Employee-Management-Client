@@ -18,7 +18,7 @@ const ContactMessage = () => {
                 {
                     contactMessages.map(message => (
                         <div
-                        className="border-2 p-5 rounded-lg dark:bg-[#1d232a] hover:border-[#63ece5] bg-[#f9fafb] hover:bg-[#f7f8fa] space-y-2"
+                        className="border-2 p-5 rounded-lg dark:bg-[#1d232a] hover:border-[#63ece5] bg-[#f9fafb] space-y-2"
                             key={message._id}
                         >
                             <div className="flex gap-2  items-center">
