@@ -13,7 +13,7 @@ const Payment = () => {
     const salary = parseInt(currentUser?.salary)
     return (
         <div className="flex justify-center items-center w-full">
-            <div className="modal-box space-y-4 w-full h-full">
+            <div className="modal-box space-y-4 w-full ">
                 <form method="dialog">
                     {/* if there is a button in form, it will close the modal */}
                     <Link to="/dashboard/employeeList" className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</Link>

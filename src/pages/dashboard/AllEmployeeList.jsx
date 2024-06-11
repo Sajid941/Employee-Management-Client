@@ -97,7 +97,7 @@ const AllEmployeeList = () => {
                 <button
                     onClick={() => handleMakeHr(row?.original?._id, row?.original?.name, row.original.role)}
                     disabled={ row.original.isFired}
-                    className="btn btn-xs bg-green-500 hover:bg-green-400">
+                    className="btn border-0 btn-xs bg-green-500 hover:bg-green-400">
                     {row.original.role === 'hr' ? "HR" : "Make HR"}
                 </button>
             </div>,
@@ -108,7 +108,7 @@ const AllEmployeeList = () => {
                 <button
                     onClick={() => handleDeleteUser(row.original.uid)}
                     disabled={row.original.isFired === true}
-                    className="btn btn-xs bg-red-500 hover:bg-red-400 text-white">
+                    className="btn border-0 btn-xs bg-red-500 hover:bg-red-400 text-white">
                     {row.original.isFired ? 'Fired' : "Fire"}
                 </button>
             </div>,
@@ -118,7 +118,7 @@ const AllEmployeeList = () => {
             cell: ({ row }) => <div>
                 {/* You can open the modal using document.getElementById('ID').showModal() method */}
                 <button
-                    className="btn btn-xs bg-[#374151] hover:bg-[#506079] text-white"
+                    className="btn border-0 btn-xs bg-[#374151] hover:bg-[#506079] text-white"
                     onClick={() => document.getElementById(`my_modal_${row.original._id}`).showModal()}
                     disabled={row.original.isFired}
                 >
@@ -128,7 +128,7 @@ const AllEmployeeList = () => {
                     <div className="modal-box">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            <button className="btn border-0 btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         </form>
                         <div>
                             <form onSubmit={handleSalary}>
@@ -167,7 +167,7 @@ const AllEmployeeList = () => {
         <div className=" w-full mt-16 space-y-5 lg:mx-10">
             <h1 className="text-2xl text-center font-medium">All EmploYee List</h1>
             <table className="table border p-5 rounded-md">
-                <thead>
+                <thead className="dark:text-white">
                     {
                         table.getHeaderGroups().map(headerGroups => (
                             <tr key={headerGroups.id}>

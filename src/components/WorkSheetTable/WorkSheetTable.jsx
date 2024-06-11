@@ -42,7 +42,7 @@ const WorkSheetTable = ({workSheets}) => {
         <div className=" w-full mt-16 space-y-5">
             <h1 className="text-2xl text-center font-medium">Submitted Work Sheet</h1>
             <table className="table border p-5 rounded-md">
-                <thead>
+                <thead className='dark:text-white'>
                     {
                         table.getHeaderGroups().map(headerGroups => (
                             <tr key={headerGroups.id}>

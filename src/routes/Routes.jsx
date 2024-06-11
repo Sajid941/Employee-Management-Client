@@ -15,6 +15,9 @@ import Progress from "../pages/dashboard/Progress";
 import AllEmployeeList from "../pages/dashboard/AllEmployeeList";
 import ContactUs from "../pages/ContactUs";
 import ContactMessage from "../pages/dashboard/ContactMessage";
+import EmployeeRoute from "./EmployeeRoute";
+import HrRoute from "./HrRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -27,8 +30,8 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path:'/contactUs',
-                element:<ContactUs/>
+                path: '/contactUs',
+                element: <ContactUs />
             }
 
         ]
@@ -49,40 +52,40 @@ const router = createBrowserRouter([
             //employee route
             {
                 path: 'workSheet',
-                element: <WorkSheet />
+                element: <EmployeeRoute><WorkSheet /></EmployeeRoute>
             },
             {
                 path: 'paymentsHistory',
-                element: <PaymentHistory />
+                element: <EmployeeRoute><PaymentHistory /></EmployeeRoute>
             },
 
             //HR route
             {
                 path: 'employeeList',
-                element: <EmployeeList />
+                element: <HrRoute><EmployeeList /></HrRoute>
             },
             {
                 path: 'payment/:email',
-                element: <Payment />
+                element: <HrRoute><Payment /></HrRoute>
             },
             {
                 path: 'details/:email',
-                element: <Details />,
+                element: <HrRoute><Details /></HrRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/payments/${params.email}`)
             },
             {
                 path: 'progress',
-                element: <Progress />
+                element: <HrRoute><Progress /></HrRoute>
             },
 
             //Admin route
             {
                 path: 'allEmployeeList',
-                element: <AllEmployeeList />
+                element: <AdminRoute> <AllEmployeeList /></AdminRoute>
             },
             {
-                path:'contactMessage',
-                element:<ContactMessage/>
+                path: 'contactMessage',
+                element: <AdminRoute><ContactMessage /></AdminRoute>
             }
         ]
     }

@@ -47,7 +47,7 @@ const PaymentHistory = () => {
         <div className=" w-full mt-16 space-y-5 lg:mx-10">
             <SectionTitle subHeading="Happy" heading="Payment History"/>
             <table className="table border p-5 rounded-md">
-                <thead>
+                <thead className="dark:text-white">
                     {
                         table.getHeaderGroups().map(headerGroups => (
                             <tr key={headerGroups.id}>

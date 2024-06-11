@@ -16,16 +16,23 @@ const Details = () => {
                     <h4 className="text-2xl font-semibold">{currentUser?.name}, <span className="text-[#737373] text-xl">{currentUser?.designation}</span></h4>
                 </div>
             </div>
-            <ResponsiveContainer width="100%" height={400} className="lg:p-10 mt-10 lg:mt-0">
-                <BarChart data={data}>
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                    <Tooltip />
-                    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                    <Bar dataKey="salary" fill="#3b82f6" />
-                </BarChart>
-            </ResponsiveContainer>
+            {
+                data.length ?
+                    <ResponsiveContainer width="100%" height={400} className="lg:p-10 mt-10 lg:mt-0">
+                        <BarChart data={data}>
+                            <XAxis dataKey="date" />
+                            <YAxis />
+                            <Tooltip />
+                            <Tooltip />
+                            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                            <Bar dataKey="salary" fill="#3b82f6" />
+                        </BarChart>
+                    </ResponsiveContainer>:
+                    <div className="mt-10">
+                        <h1 className="text-center text-2xl lg:text-4xl text-warning font-bold ">The Employee do not have payment history</h1>
+                    </div>
+            }
+
         </div>
 
 
