@@ -151,14 +151,14 @@ const SignUp = () => {
                                 <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
                                 <input {...register('password', {
                                     required: true,
-                                    // minLength: 6,
-                                    // pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).*$/
+                                    minLength: 6,
+                                    pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).*$/
                                 })}
                                     type="password" placeholder="Enter your password"
                                     className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                                 {errors.password?.type === 'required' && <span className="text-red-600">This field is required</span>}
-                                {/* {errors.password?.type === 'minLength' && <span className="text-red-600">Password must be at least 6 characters long</span>}
-                                    {errors.password?.type === 'pattern' && <span className="text-red-600">Password must contain at least one capital letter and at least one special character.</span>} */}
+                                {errors.password?.type === 'minLength' && <span className="text-red-600">Password must be at least 6 characters long</span>}
+                                    {errors.password?.type === 'pattern' && <span className="text-red-600">Password must contain at least one capital letter and at least one special character.</span>}
                             </div>
 
                             <button

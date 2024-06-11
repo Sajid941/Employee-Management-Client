@@ -8,8 +8,11 @@ import useAllUsers from "../../hooks/useAllUsers";
 const AllEmployeeList = () => {
     const axiosSecure = useAxiosSecure()
 
-    const { users, refetch } = useAllUsers()
-    const handleMakeHr = (id, name) => {
+    const { users, refetch, } = useAllUsers()
+    const handleMakeHr = (id, name , role) => {
+        if(role === "hr"){
+            return toast.error('ALready HR')
+        }
         Swal.fire({
             title: `Do you want to make ${name} HR`,
             text: "Are you sure?",
@@ -47,16 +50,31 @@ const AllEmployeeList = () => {
                     .then(res => {
                         if (res.data.message === "success") {
                             axiosSecure.put(`/firedUser/${uid}`)
-                            .then(res=>{
-                                if(res.data.modifiedCount > 0){
-                                    refetch()
-                                }
-                            })
+                                .then(res => {
+                                    if (res.data.modifiedCount > 0) {
+                                        refetch()
+                                    }
+                                })
 
                         }
                     })
             }
         });
+    }
+
+    const handleSalary = (e) => {
+        e.preventDefault()
+        const id = e.target.id.value
+        const salary = e.target.salary.value
+        axiosSecure.patch(`/adjustSalary/${id}`, { salary })
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    refetch()
+                    e.target.reset()
+                    toast.success('Salary Adjust Successfully')
+                }
+            })
+        console.log(id, salary);
     }
     const data = useMemo(() => users, [users])
     const columnHelper = createColumnHelper()
@@ -77,10 +95,10 @@ const AllEmployeeList = () => {
         columnHelper.display({
             cell: ({ row }) => <div>
                 <button
-                    onClick={() => handleMakeHr(row?.original?._id, row?.original?.name)}
-                    disabled={row.original.role === "hr"}
+                    onClick={() => handleMakeHr(row?.original?._id, row?.original?.name, row.original.role)}
+                    disabled={ row.original.isFired}
                     className="btn btn-xs bg-green-500 hover:bg-green-400">
-                    Make HR
+                    {row.original.role === 'hr' ? "HR" : "Make HR"}
                 </button>
             </div>,
             header: "Make HR"
@@ -91,17 +109,49 @@ const AllEmployeeList = () => {
                     onClick={() => handleDeleteUser(row.original.uid)}
                     disabled={row.original.isFired === true}
                     className="btn btn-xs bg-red-500 hover:bg-red-400 text-white">
-                    {row.original.isFired === true ? 'Fired' : "Fire"}
+                    {row.original.isFired ? 'Fired' : "Fire"}
                 </button>
             </div>,
             header: "Action"
         }),
         columnHelper.display({
             cell: ({ row }) => <div>
+                {/* You can open the modal using document.getElementById('ID').showModal() method */}
                 <button
-                    className="btn btn-xs bg-[#374151] hover:bg-red-400 text-white">
+                    className="btn btn-xs bg-[#374151] hover:bg-[#506079] text-white"
+                    onClick={() => document.getElementById(`my_modal_${row.original._id}`).showModal()}
+                    disabled={row.original.isFired}
+                >
                     Adjust Salary
                 </button>
+                <dialog id={`my_modal_${row.original._id}`} className="modal">
+                    <div className="modal-box">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <div>
+                            <form onSubmit={handleSalary}>
+                                <input
+                                    hidden
+                                    type="text"
+                                    value={row.original._id}
+                                    name="id"
+                                />
+                                <div>
+                                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Salary</label>
+                                    <input type="number"
+                                        min={row.original.salary}
+                                        name="salary"
+                                        defaultValue={row.original.salary}
+                                        required
+                                        className="block w-full mb-2 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                </div>
+                                <button className="py-4 btn">Adjust</button>
+                            </form>
+                        </div>
+                    </div>
+                </dialog>
             </div>,
             header: "Adjust Salary"
         })

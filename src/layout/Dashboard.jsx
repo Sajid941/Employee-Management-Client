@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import 'sweetalert2/src/sweetalert2.scss'
 import useUserRole from "../hooks/useUserRole";
 import { Helmet } from "react-helmet";
+import { FaMessage } from "react-icons/fa6";
 
 const Dashboard = () => {
     const theme = localStorage.getItem('theme')
@@ -63,18 +64,15 @@ const Dashboard = () => {
                                 userRole === 'admin' &&
                                 <>
                                     <li><NavLink to="/dashboard/allEmployeeList"><FaUsers size={20} />All Employee List</NavLink></li>
-                                    <li><NavLink to="/dashboard/contactMessage"><FaUsers size={20} />Contact Message</NavLink></li>
+                                    <li><NavLink to="/dashboard/contactMessage"><FaMessage size={20} />Contact Message</NavLink></li>
                                 </>
                             }
 
                             <hr className="dark:border-[#737373]" />
 
                             <li><NavLink to="/"><MdHomeFilled size={20} />Home</NavLink></li>
-                            {
-                                userRole === 'admin' ?
-                                    undefined :
-                                    <li><NavLink to="/contactUs"><MdConnectWithoutContact size={20} />Contact Us</NavLink></li>
-                            }
+                            <li><NavLink to="/contactUs"><MdConnectWithoutContact size={20} />Contact Us</NavLink></li>
+
                         </ul>
 
                     </div>
