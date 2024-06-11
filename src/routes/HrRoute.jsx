@@ -11,6 +11,7 @@ const HrRoute = ({ children }) => {
     const axiosSecure = useAxiosSecure()
     const { data: role = [], isPending } = useQuery({
         queryKey: ['user role', user?.email],
+        enabled : !!user?.email,
         queryFn: async () => {
             const res = await axiosSecure(`/users/checkRole/${user?.email}`)
             return res.data
