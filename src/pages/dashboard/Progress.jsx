@@ -64,7 +64,7 @@ const Progress = () => {
     })
 
     return (
-        <div className=" w-full mt-16 space-y-7 lg:px-10 ">
+        <div className=" w-full my-16 space-y-7 lg:px-10 ">
             <SectionTitle subHeading="progress" heading="Employees Work Sheets" />
             <div className="flex gap-5">
                 <div>

@@ -20,7 +20,7 @@ const Dashboard = () => {
     const { userRole } = useUserRole()
 
     return (
-        <div className={`${theme === "true" ? "dark" : ""} text-[#151515] dark:text-white  lg:flex bg-[#f7f8fa] dark:bg-[#1d232a] h-screen`}>
+        <div className={`${theme === "true" ? "dark" : ""} text-[#151515] dark:text-white  lg:flex bg-[#f7f8fa] dark:bg-[#1d232a] min-h-screen`}>
             <Helmet>
                 <title>Dashboard | LogiLink Labs</title>
             </Helmet>
@@ -78,7 +78,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className="lg:flex-1 flex justify-center mt-10 lg:border-l">
+            <div className="lg:flex-1 flex justify-center my-10  lg:border-l">
                 <Outlet />
             </div>
             <Toaster />

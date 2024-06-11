@@ -1,8 +1,17 @@
-# React + Vite
+# LogiLink Labs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Embark on a journey of seamless interaction with our website. From Contact Us to Employee Lists, we've crafted each feature with precision and care. Dive into our world where every click leads to a meaningful experience. Explore, engage, and discover the essence of our platform, tailored just for you.
 
-Currently, two official plugins are available:
+## [Website Live Link](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features of this website
+- Secure Payment Processing
+- Employee Verification
+- Detailed Transaction History
+- Responsive Design
+- Integration with Existing Systems
+- Customer Support
+- User Roles and Permissions
+- Search and Filter Functionality
+- 
+ 
